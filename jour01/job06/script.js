@@ -1,16 +1,18 @@
 
 
-
-var jourssemaines = ['lundi','mardi','mercredi','jeudi','vendredi','samedi','dimanche']
-
-function afficherjourssemaines(){
-    for(let i = 0; i < jourssemaines.length ; i++){
-        console.log(jourssemaines[i])
+function fizzBuzz() {
+    for( let i = 1; i <= 151; i++){
+        if( i % 3 === 0 && i % 5 === 0){
+            console.log('FizzBuzz')
+        } else if ( i % 5 === 0){
+            console.log('Buzz')
+        } else if ( i % 3 === 0){
+            console.log('Fizz')
+        } else  {
+            console.log(i)
+        }
     }
 }
 
-afficherjourssemaines();
-
-
-
+fizzBuzz();
 
