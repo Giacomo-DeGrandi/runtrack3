@@ -7,15 +7,8 @@ window.onload=function(){
 
 function showHide(event){
     // print the event object to console
-    var cit = document.querySelector('.citation');
-    console.log(cit)
-    if(cit){
-        cit .classList.remove("citation");
-        cit .classList.add("citation2");
-    } else {
-        var cit = document.querySelector('.citation2');
-        cit .classList.remove("citation2");
-        cit .classList.add("citation");
-    }
+    var cit = document.querySelector('.citation')
+    cit.classList.toggle('citation2')
+
 }
 

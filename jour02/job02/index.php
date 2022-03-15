@@ -6,9 +6,6 @@
     <title></title>
     <script src="script.js"></script>
     <style>
-        .citation {
-            display:block;
-        }
         .citation2{
             display:none;
         }
