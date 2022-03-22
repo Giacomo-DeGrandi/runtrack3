@@ -113,10 +113,7 @@ $(document).ready(function () {
     const testPasswordConfirmation = () => {
         // initialise my valide condition to false to test the errors
         var isValid = false
-        // min num of chars
-        var min = 8
-        // max num of chars
-        var max = 50
+
         // take away spaces
         const passwordConf = mypasswordConf.value.trim();        // take away spaces
         const password = mypassword.value.trim();
