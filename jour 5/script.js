@@ -77,7 +77,7 @@ $(document).ready(function () {
         if (!isRequired(emailX)) {
             showErrors(myemail, 'Email can\'t be blank')
             // test if the length is at least 8ch and the max is 35ch
-        } else if (!validateEmail(emailX)) {
+        } else if (!validateEmail(emailX)||!isBetween(emailX.length,min,max)) {
             showErrors(myemail, 'Email can\'t contain (!#$%^&*), it has to be at least 8ch and 35ch')
         } else {
             showValids(myemail)
@@ -99,7 +99,7 @@ $(document).ready(function () {
         if (!isRequired(passwordX)) {
             showErrors(mypassword, 'Password can\'t be blank')
             // test if the length is at least 8ch and the max is 50ch
-        } else if (!validatePassword(passwordX)) {
+        } else if (!validatePassword(passwordX)||!isBetween(emailX.length,min,max)) {
             const myval = 'Password has to be at least 1 lowercase, 1 uppercase,1 number and has to be between a minimum of 8ch and at max 50ch'
             showErrors(mypassword, myval)
             // else validate the input
