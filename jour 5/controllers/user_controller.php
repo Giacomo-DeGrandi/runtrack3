@@ -1,7 +1,7 @@
 <?php
 
 // Models : User  ____________________________________________________________________________________________
-require_once('models/User.php');
+require_once('../models/User.php');
 
 // sec functions _______________________________________________________________________________________________________
 
@@ -13,25 +13,21 @@ foreach ($_POST as $key => $value) {
 }
 
 
-// filter every $_POST of user input with this controller
-
-$_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-
 // Subscribe____________________________________________________________________________________________________________
 
-$username = $_POST['username'];
-$password = $_POST['password'];
-//... check username and password here
-echo json_encode(array('result' => true)); // this is response, true or false
-exit();
-
+// In database my user has a constraint on the email column ALTER TABLE utilisateurs ADD CONSTRAINT email UNIQUE (email);
 
 
 if(isset($_POST['submit_subscription'])){
 
+    echo 'hello PHP';
+
     $nom = htmlspecialchars($_POST['nom']);
     $prenom = htmlspecialchars($_POST['prenom']);
-    $email = htmlspecialchars($_POST['email']);
+    $email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
+    $password = htmlspecialchars($_POST['password']);
+    $password_conf = htmlspecialchars($_POST['password_conf']);
+    $user = new User();
 
     $errors=array();
 
@@ -40,48 +36,28 @@ if(isset($_POST['submit_subscription'])){
     if(empty($_POST['nom'])){ array_push($errors,'please insert your nom'); }
     if(empty($_POST['email'])){ array_push($errors,'please insert your email');   }
     if (!preg_match('/^[a-z0-9._-]+[@]+[a-zA-Z0-9._-]+[.]+[a-z]{2,3}$/', $email))
-    { array_push($_SESSION['errors'], "Email format is wrong"); }
-    if(empty($_POST['password'])){ array_push($errors,'please insert your password'); $check++;  }
-    if(empty($_POST['pass_conf'])){ array_push($errors,'please confirm your password'); $check++;  }
+    { array_push($errors, "Email format is wrong"); }
+    if(empty($_POST['password'])){ array_push($errors,'please insert your password'); }
+    if(empty($_POST['password_conf'])){ array_push($errors,'please confirm your password');   }
+    if ($password !== $password_conf) { array_push($errors, "The two passwords do not match"); }
+    if (!preg_match('/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,})/', $password)) { array_push($errors, "Password format is wrong");}
 
-    // div for alert
-    $tmp= '<div class="border border-secondary rounded-0 px-4 mb-4 mt-2 ml-2 text-center" >';
+    //check if user exists
+    $chkExists = $user->chkExists($email);
+    var_dump($errors);
+    if ( gettype($chkExists) == "array" ) {array_push($errors, "User already exists"); }
 
-    //check for errors
-    foreach($errors as $error => $value){
-        if($check>1) {
-            $tmp.= 'please fill in all the fields';
-            break;
-        } else {
-            $tmp.=$value;
-        }
+    // Finally, register user if there are no errors in the form
+    if ( count($errors) == 0)
+    {
+        $user->subscribeUser($prenom, $nom, $email, $password);
+
+        //récupère toutes les informations pour avoir l'id qui vient d'être créé
+        $userInfos = $user->chkExists($email);
+
+       // header('location: ./connexion.php');
+        echo 'SUCCESS';
     }
-
-
-    //if there aren't errors
-    if(empty($errors)){
-        //test counter
-        $test=0;
-        // instatiate new user
-        $user= new User();
-        // check existance in Db
-        $password=password_hash($_POST['password'], PASSWORD_BCRYPT);
-        $test= $user->checkExists($_POST['email']);
-        // if no errors occur so that test equal to zero
-        if($test===0){
-
-            // hash the pass
-            $password=password_hash($_POST['password'], PASSWORD_BCRYPT);
-            // then subscribe
-            $user->subscribeUser($_POST['prenom'],$_POST['nom'],$_POST['email'],$password,
-                $_POST['address'],intval($_POST['code_postal']),intval($id_droit));
-            header('location:connexion.php');
-            exit();
-        } else {
-            $tmp.='cet utilisateur existe déjà, <br>choisissez un autre email et nom utilisateur svp';
-        }
-    }
-    $tmp.='</div>';
 }
 
 // Connect______________________________________________________________________________________________________________
