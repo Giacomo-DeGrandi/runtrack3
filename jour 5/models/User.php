@@ -37,10 +37,8 @@ Class User extends Model
 
     public function subscribeUser($prenom, $nom, $email, $password)
     {
-        $sql = "INSERT INTO utilisateurs (prenom, nom, email,
-                                            password) 
-                        VALUES (:prenom, :nom, :email,
-                                :password)";
+        $sql = "INSERT INTO utilisateurs (prenom, nom, email, password) 
+                        VALUES (:prenom, :nom, :email, :password)";
         $params = ([':prenom' => $prenom, ':nom' => $nom, ':email' => $email,
             ':password' => password_hash($password, PASSWORD_DEFAULT)]);
         $this->selectQuery($sql, $params);

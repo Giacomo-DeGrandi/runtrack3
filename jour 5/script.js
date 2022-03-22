@@ -1,4 +1,6 @@
 
+// my sign up part________________________________________________________________
+
 $(document).ready(function () {
     //  get my vars
     const mynom = document.querySelector('#nom');   //.textContent
@@ -7,6 +9,7 @@ $(document).ready(function () {
     const mypassword = document.querySelector('#password');
     const mypasswordConf = document.querySelector('#password_conf');
     var myerrors = []
+    var counting = []
 
     const form = document.querySelector('#form');
 
@@ -35,6 +38,7 @@ $(document).ready(function () {
         } else {
             showValids(mynom)
             isValid = true
+            counting.push('nom')
         }
         return isValid
     }
@@ -59,6 +63,7 @@ $(document).ready(function () {
         } else {
             showValids(myprenom)
             isValid = true
+            counting.push('prenom')
         }
         return isValid
     }
@@ -88,10 +93,11 @@ $(document).ready(function () {
                         return false;
                     } else {
                         showValids(myemail)
-                        isValid = true;
+                        counting.push('email')
                     }
                 });
             })
+            isValid = true;
         }
         return isValid
     }
@@ -109,13 +115,14 @@ $(document).ready(function () {
         if (!isRequired(passwordX)) {
             showErrors(mypassword, 'Password can\'t be blank')
             // test if the length is at least 8ch and the max is 50ch
-        } else if (!validatePassword(passwordX) || !isBetween(emailX.length, min, max)) {
-            const myval = 'Password has to be at least 1 lowercase, 1 uppercase,1 number and has to be between a minimum of 8ch and at max 50ch'
+        } else if (!validatePassword(passwordX) || !isBetween(passwordX, min, max)) {
+            let myval = 'Password has to be at least 1 lowercase, 1 uppercase,1 number and has to be between a minimum of 8ch and at max 50ch'
             showErrors(mypassword, myval)
             // else validate the input
         } else {
             showValids(mypassword)
             isValid = true
+            counting.push('password')
         }
         return isValid
     }
@@ -137,6 +144,7 @@ $(document).ready(function () {
         } else {
             showValids(mypasswordConf)
             isValid = true
+            counting.push('password_conf')
         }
         return isValid
     }
@@ -174,7 +182,6 @@ $(document).ready(function () {
     // Validation showing function if is valid remove the invalid class and add is_valid
     const showValids = (input) => {
         const my_form = input.parentElement
-        console.log(my_form)
         my_form.classList.remove('not_valid')
         my_form.classList.add('is_valid')
         // select the small as containers and insert the error message as content
@@ -186,7 +193,6 @@ $(document).ready(function () {
     // Error showing function if is invalid remove the valid class and add not_valid
     const showErrors = (input, value) => {
         const my_form = input.parentElement
-        console.log(my_form)
         my_form.classList.remove('is_valid')
         my_form.classList.add('not_valid')
         // select the small as containers and insert the error message as content
@@ -195,43 +201,98 @@ $(document).ready(function () {
     }
 
 
-    // LISTEN TO MY EVENTS
-
+    // Listen to the inputs for callsback
 
     form.addEventListener('input', function (e) {
 
-        var counting = 0
 
         switch (e.target.id) {
             case 'nom':
                 testValidName();
-                counting++;
                 break;
             case 'prenom':
                 testValidPrenom();
-                counting++;
                 break;
             case 'email':
                 testValidEmail();
-                counting++;
                 break;
             case 'password':
                 testValidPassword();
-                counting++;
                 break;
             case 'password_conf':
                 testPasswordConfirmation();
-                counting++;
                 break;
         }
-        console.log(counting)
-        if (counting === 5) {
-            if (isFormValid) {
-                form.setAttribute("method", "POST");
-            }
-        }
+
     })
+
+    $('#submit_subscription').on('submit', function (event) {
+        event.preventDefault()
+        // validate forms
+        let nameV = testValidName(),
+            prenomV = testValidPrenom(),
+            emailV = testValidEmail(),
+            passwordV = testValidPassword(),
+            confPasswordV = testPasswordConfirmation();
+
+        let isFormValid = nameV && prenomV && emailV && passwordV && confPasswordV
+
+        // submit to the server if the form is valid
+        if (isFormValid) {
+
+            $.ajax( '../controllers/user_controller.php', "post", {
+                'submit_subscription': true,
+                'nom': mynom,
+                'prenom': myprenom,
+                'email': myemail,
+                'password': mypassword,
+                'password_conf': mypasswordConf,
+            }, function (data) {
+                if (data == 'FAIL') {
+                    return false;
+                } else {
+                    return data;
+                }
+            });
+        }
+
+    })
+
+    // connexion _________________________
+
+    $('#submit_connection').on('submit', function (event) {
+        event.preventDefault()
+        // validate forms
+        const emailCon = document.querySelector('#email_con').textContent;
+        const passwordCon = document.querySelector('#password_con').textContent;
+        let isFormValid =  emailCon && passwordCon
+
+        // submit to the server if the form is valid
+        if (isFormValid) {
+
+            $.ajax( '../controllers/user_controller.php', "post", {
+                'submit_connection': true,
+                'email': myemail,
+                'password': mypassword,
+            }, function (data) {
+                if (data == 'FAIL') {
+                    return false;
+                } else {
+                    return data;
+                }
+            });
+        }
+
+    })
+
 })
+
+
+// my Log In part________________________________________________________________
+
+
+
+
     /*
     $('#form').on('input', function (e) {
         // prevent the form from submitting

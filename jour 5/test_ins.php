@@ -16,7 +16,7 @@ if(isset($_POST['test_me'])){
     $email = filter_var($_POST['test_me'],FILTER_SANITIZE_EMAIL);
     $chkExists = $user->chkExists($email);
     if($chkExists){
-        echo 'exists';
+        echo 'itexists';
     } else {
         echo 'not_exists';
     }
