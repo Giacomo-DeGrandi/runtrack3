@@ -4,9 +4,9 @@
 <?php ob_start(); ?>
 
     <div class="container-fluid">
-        <div class="d-flex flex-column align-items-center justify-content-center p-3" >
+        <div class="d-flex flex-column align-items-center justify-content-center p-3 w-100" >
             <p class="h1 mb-4 mt-3">Sign up</p>
-            <form id="form" class="shadow-sm p-5 border border-dark rounded-2">
+            <form id="form" class="col-md-5 shadow-sm p-5 border border-dark p-2 ">
                 <div class="form-field text-center">
                     <input type="text" id="nom" name="nom" class="p-1 mb-2" placeholder="nom" autocomplete="off"><br>
                     <small></small>
@@ -31,7 +31,7 @@
                   <button type="submit" name="submit_subscription" id="sign_up" class="btn btn-outline-dark p-3">subscribe</button>
                 </div>
             </form>
-            <b><?php if($errors){ foreach($errors as $error){ echo '<p>'.$error.'</p>'; }; } ?></b>
+            <b><?php if(isset($errors)){ foreach($errors as $error){ echo '<p>'.$error.'</p>'; }; } ?></b>
         </div>
     </div>
 

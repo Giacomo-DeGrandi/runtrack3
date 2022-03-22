@@ -20,8 +20,6 @@ foreach ($_POST as $key => $value) {
 
 if(isset($_POST['submit_subscription'])){
 
-    echo 'hello PHP';
-
     $nom = htmlspecialchars($_POST['nom']);
     $prenom = htmlspecialchars($_POST['prenom']);
     $email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);

@@ -29,7 +29,7 @@ $(document).ready(function () {
         if (!isRequired(nom)) {
             showErrors(mynom, 'Nom can\'t be blank')
             // test if the length is at least 3ch and the max is 15ch
-        } else if (!isBetween(nom.length,min,max)) {
+        } else if (!isBetween(nom.length, min, max)) {
             showErrors(mynom, 'Nom has to be between 3 and 15 characters')
             // else validate the input
         } else {
@@ -53,7 +53,7 @@ $(document).ready(function () {
         if (!isRequired(prenom)) {
             showErrors(myprenom, 'Prenom can\'t be blank')
             // test if the length is at least 3ch and the max is 15ch
-        } else if (!isBetween(prenom.length,min,max)) {
+        } else if (!isBetween(prenom.length, min, max)) {
             showErrors(myprenom, 'Prenom has to be between 3 and 15 characters')
             // else validate the input
         } else {
@@ -77,11 +77,21 @@ $(document).ready(function () {
         if (!isRequired(emailX)) {
             showErrors(myemail, 'Email can\'t be blank')
             // test if the length is at least 8ch and the max is 35ch
-        } else if (!validateEmail(emailX)||!isBetween(emailX.length,min,max)) {
+        } else if (!validateEmail(emailX) || !isBetween(emailX.length, min, max)) {
             showErrors(myemail, 'Email can\'t contain (!#$%^&*), it has to be at least 8ch and 35ch')
         } else {
-            showValids(myemail)
-            isValid = true
+            $("input").click(function () {
+                $.post("../test_ins.php", {'test_me': emailX}, function (data) {
+                    console.log(data);
+                    if (data == 'exists') {
+                        showErrors(myemail, 'This email already exists, please choose another one')
+                        return false;
+                    } else {
+                        showValids(myemail)
+                        isValid = true;
+                    }
+                });
+            })
         }
         return isValid
     }
@@ -99,7 +109,7 @@ $(document).ready(function () {
         if (!isRequired(passwordX)) {
             showErrors(mypassword, 'Password can\'t be blank')
             // test if the length is at least 8ch and the max is 50ch
-        } else if (!validatePassword(passwordX)||!isBetween(emailX.length,min,max)) {
+        } else if (!validatePassword(passwordX) || !isBetween(emailX.length, min, max)) {
             const myval = 'Password has to be at least 1 lowercase, 1 uppercase,1 number and has to be between a minimum of 8ch and at max 50ch'
             showErrors(mypassword, myval)
             // else validate the input
@@ -134,15 +144,15 @@ $(document).ready(function () {
 
     // validation TESTS_______________________________-
     const isRequired = (value) => {
-        if(value === '') {
+        if (value === '') {
             return false
         } else {
             return true
         }
     }
     // longueur
-    const isBetween = (length, min , max) => {
-        if(length < min || length > max){
+    const isBetween = (length, min, max) => {
+        if (length < min || length > max) {
             return false
         } else {
             return true
@@ -189,24 +199,40 @@ $(document).ready(function () {
 
 
     form.addEventListener('input', function (e) {
+
+        var counting = 0
+
         switch (e.target.id) {
             case 'nom':
                 testValidName();
+                counting++;
                 break;
             case 'prenom':
                 testValidPrenom();
+                counting++;
                 break;
             case 'email':
                 testValidEmail();
+                counting++;
                 break;
             case 'password':
                 testValidPassword();
+                counting++;
                 break;
             case 'password_conf':
                 testPasswordConfirmation();
+                counting++;
                 break;
         }
+        console.log(counting)
+        if (counting === 5) {
+            if (isFormValid) {
+                form.setAttribute("method", "POST");
+            }
+        }
     })
+})
+    /*
     $('#form').on('input', function (e) {
         // prevent the form from submitting
         e.preventDefault();
@@ -228,7 +254,7 @@ $(document).ready(function () {
     })
 
 })
-
+*/
 /*
 
 
