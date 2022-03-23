@@ -28,7 +28,7 @@
                      <small></small>
                  </div>
                 <div class="form-field text-center">
-                  <button type="submit" name="submit_subscription" id="sign_up" class="btn  btn-outline-dark p-1">Subscribe</button>
+                  <button type="submit" name="submit_subscription" id="sign_up" class="btn  btn-outline-dark p-1 mt-3">Subscribe</button>
                 </div>
             </form>
             <b><?php if(isset($errors)){ foreach($errors as $error){ echo '<p>'.$error.'</p>'; }; } ?></b>

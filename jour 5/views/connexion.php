@@ -5,7 +5,7 @@
     <div class="container-fluid">
         <div class="d-flex flex-column align-items-center justify-content-center p-3 w-100" >
             <p class="h1 mb-4 mt-3 ">Log In</p>
-            <form id="form" class="col-md-5 shadow-sm bg-light  p-5 border border-dark p-2 " method="POST">
+            <form id="form" class="col-md-5 shadow-sm bg-light p-5 " method="POST">
                 <div class="form-field text-center">
                     <input type="email" id="email_con" name="email_con" class="p-1 mb-2" placeholder="email" autocomplete="off"><br>
                     <small></small>
@@ -15,7 +15,7 @@
                     <small></small>
                 </div>
                 <div class="form-field text-center">
-                    <button type="submit" name="submit_connection" id="sign_in" class="btn-outline-dark p-1">Connect</button>
+                    <button type="submit" name="submit_connection" id="sign_in" class="btn-outline-dark p-1 mt-3">Connect</button>
                 </div>
             </form>
             <b><?php if(isset($errors)){ foreach($errors as $error){ echo '<p>'.$error.'</p>'; }; } ?></b>
