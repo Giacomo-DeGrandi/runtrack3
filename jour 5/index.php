@@ -20,7 +20,10 @@ POST the credentials to PHP and let PHP communicate with the java backend respon
 instead of reserving them to the client
 Original post:
 
-I don't quite understand why you think the PHP backend can't be trusted but in your scheme the PHP already gets your credentials, thanks to that original POST. If you want to avoid using PHP why not have your form call a JavaCcript function instead of POSTing to the PHP backend in the first place:
+I don't quite understand why you think the PHP backend can't be trusted but in your
+ scheme the PHP already gets your credentials, thanks to that original POST.
+ If you want to avoid using PHP why not have your form call a JavaCcript function instead
+ of POSTing to the PHP backend in the first place:
 
 User enters credentials
 User clicks "login"
@@ -68,7 +71,8 @@ definitely gonna be the worst-kept secret you've ever wished hadn't got out.
 
 
 758
-You shouldn´t use client javascript to access databases for several reasons (bad practice, security issues, etc) but if you really want to do this, here is an example:
+You shouldn´t use client javascript to access databases for several reasons (bad practice, security issues, etc)
+but if you really want to do this, here is an example:
 
 var connection = new ActiveXObject("ADODB.Connection") ;
 

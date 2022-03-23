@@ -7,10 +7,6 @@ document.addEventListener('DOMContentLoaded', () => {
     let check2 = document.body.clientHeight
     console.log(check2)
 
-    function doSomething(scrollPos) {
-
-    }
-
     document.addEventListener('scroll', function(e) {
 
         let check = window.scrollY

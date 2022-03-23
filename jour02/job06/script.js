@@ -20,7 +20,7 @@ function logKey(e) {
     // If complete, alert and reset
     if (pattern.length === current) {
         current = 0;
-        window.alert('KONAMI C O D E');
+        document.body.style.backgroundColor = "rebeccapurple";
     }
 
 }

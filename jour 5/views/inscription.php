@@ -31,7 +31,17 @@
                   <button type="submit" name="submit_subscription" id="sign_up" class="btn  btn-outline-dark p-1 mt-3">Subscribe</button>
                 </div>
             </form>
-            <b><?php if(isset($errors)){ foreach($errors as $error){ echo '<p>'.$error.'</p>'; }; } ?></b>
+            <b><?php
+                if(isset($errors)) {
+                    if (is_array($errors)) {
+                        foreach ($errors as $error) {
+                            echo '<p>' . $error . '</p>';
+                        }
+                    } else {
+                        echo  '<p>' . $errors . '</p>';
+                    }
+                }
+                ?></b>
         </div>
     </div>
 

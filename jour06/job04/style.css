@@ -1,0 +1,39 @@
+@media (min-width : 768px){
+    * {
+        font-family:Monospaced;
+    }
+    header a {
+        padding:20px;
+    }
+
+    header > button {
+        display:none;
+    }
+
+
+
+}
+
+@media (max-width : 767px){
+    * {
+        font-family:Monospaced;
+    }
+    body {
+        margin:0;
+    }
+    header a {
+        margin-left:10px;
+        display:none;
+    }
+    header > button {
+        border:none;
+        background-color: #FFFFFF;
+        margin: 0px;
+    }
+    img {
+        width: 54px;
+    }
+
+
+}
+

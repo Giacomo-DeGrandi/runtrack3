@@ -9,7 +9,6 @@ $(document).ready(function () {
     const mypassword = document.querySelector('#password');
     const mypasswordConf = document.querySelector('#password_conf');
     var myerrors = []
-    var counting = []
 
     const form = document.querySelector('#form');
 
@@ -38,7 +37,6 @@ $(document).ready(function () {
         } else {
             showValids(mynom)
             isValid = true
-            counting.push('nom')
         }
         return isValid
     }
@@ -63,7 +61,6 @@ $(document).ready(function () {
         } else {
             showValids(myprenom)
             isValid = true
-            counting.push('prenom')
         }
         return isValid
     }
@@ -86,14 +83,13 @@ $(document).ready(function () {
             showErrors(myemail, 'Email can\'t contain (!#$%^&*), it has to be at least 8ch and 35ch')
         } else {
             $("input").click(function () {
-                $.post("../test_ins.php", {'test_me': emailX}, function (data) {
+                $.post("../test_ins.php", {'test_me': emailX }, function (data) {
                     console.log(data);
                     if (data == 'exists') {
                         showErrors(myemail, 'This email already exists, please choose another one')
                         return false;
                     } else {
                         showValids(myemail)
-                        counting.push('email')
                     }
                 });
             })
@@ -122,7 +118,6 @@ $(document).ready(function () {
         } else {
             showValids(mypassword)
             isValid = true
-            counting.push('password')
         }
         return isValid
     }
@@ -144,7 +139,6 @@ $(document).ready(function () {
         } else {
             showValids(mypasswordConf)
             isValid = true
-            counting.push('password_conf')
         }
         return isValid
     }
