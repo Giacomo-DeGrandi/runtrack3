@@ -12,18 +12,20 @@
 <main>
     <div class="d-flex flex-column align-items-center justify-content-center">
         <form class="d-flex flex-column align-items-center py-5">
-            <div class="row">
-                <input type="number" class="form-control" placeholder="id" id="id"/>
-                <input type="text" class="form-control" placeholder="nom" id="nom"/>
-                <label for="poke-select">type</label>
-                <select class="form-select" aria-label="poke-select" id="select">
-                    <option value="undefined">select a type</option>
-                    <!-- my options -->
-                </select>
+            <div class="column">
+                <div class="p-2"><input type="number" id="myNumber"></div>
+                <div class="p-2"><input type="text" class="form-control" placeholder="nom" id="nom"></div>
+                <div class="p-2">
+                    <label for="poke-select p-3">type</label>
+                    <select class="form-select " aria-label="poke-select" id="select">
+                        <option value="undefined">select a type</option>
+                        <!-- my options -->
+                    </select>
+                </div>
             </div>
-            <button type="button" id="filtrer" class="btn btn-outline-dark shadow-sm">filter</button>
+            <button type="button" id="filtrer" class="btn btn-outline-dark shadow-sm p-3">filter</button>
         </form>
-        <div class="album py-5 bg-light" id="cards"></div>
+        <div class="d-flex flex-wrap align-items-center justify-content-center flex-direction row w-100 bg-light" id="cards"></div>
     </div>
 </main>
 </body>
