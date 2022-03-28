@@ -1,0 +1,56 @@
+
+@media only screen {
+
+    .maindiv {
+        display:flex;
+        flex-direction:column;
+        flex-wrap: wrap;
+        align-items: center;
+        width:100%;
+        background-color: darkgray;
+    }
+    .myprogressbarbegin {
+        height:20px;
+        border:solid 1px black;
+        background-color: goldenrod;
+        width:30px;
+        border-right:none;
+        border-top-left-radius: 2px;
+        border-bottom-left-radius: 2px;
+    }
+    .myprogressbarmiddle {
+        height:20px;
+        border:solid 1px black;
+        background-color: goldenrod;
+        width:30px;
+        border-right:none;
+        border-left:none;
+    }
+    .myprogressbarend {
+        height:20px;
+        border:solid 1px black;
+        background-color: goldenrod;
+        width:30px;
+        border-left:none;
+        border-top-right-radius: 2px;
+        border-bottom-right-radius: 2px;
+    }
+
+}
+
+@media (max-width : 1260px) and (max-height : 1100px) {
+    .maindiv {
+        display:block;
+    }
+}
+@media (max-width : 920px) and (max-height : 680px) {
+    body {
+        background-color: #275fa0;
+    }
+}
+
+@media (max-width : 680px){
+    body {
+        background-color: #ffffff;
+    }
+}
