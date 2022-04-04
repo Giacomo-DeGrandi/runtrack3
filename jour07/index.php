@@ -93,7 +93,11 @@
             <div class="d-flex align-items-center flex-column">
                 <h5 class="display-4">Félicitations!</h5>
                 <div class="col">
-                    <p>🦋🦋🦋🦋🦋🦋🦋🦋🦋🦋🦋🦋<br> 🦋🦋🦋🦋🦋🦋🦋🦋🦋🦋🦋🦋<br> 🦋🦋🦋🦋🦋🦋🦋🦋🦋🦋🦋🦋<br> 🦋🦋🦋🦋🦋🦋🦋🦋🦋🦋🦋🦋 <br></p>
+                    <p>🦋🦋🦋🦋🦋🦋🦋🦋🦋🦋🦋🦋<br>
+                        🦋🦋🦋🦋🦋🦋🦋🦋🦋🦋🦋🦋<br>
+                        🦋🦋🦋🦋🦋🦋🦋🦋🦋🦋🦋🦋<br>
+                        🦋🦋🦋🦋🦋🦋🦋🦋🦋🦋🦋🦋 <br>
+                    </p>
                     <p></p><br><p></p><br><p></p><br><p></p>
                 </div>
                 <div class="row">
