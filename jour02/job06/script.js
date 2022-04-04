@@ -7,7 +7,7 @@ document.addEventListener('keydown', logKey);
 var pattern = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
 var current = 0;
 
-function logKey(e) {
+function logKey(event) {
 
     if (pattern.indexOf(event.key) < 0 || event.key !== pattern[current]) {
         current = 0;
